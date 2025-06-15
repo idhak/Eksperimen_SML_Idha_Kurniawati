@@ -30,9 +30,9 @@ jobs:
       with:
         name: hasil-preprocessing
         path: |
-          preprocessing/heart_preprocessing/X_train_processed.csv
-          preprocessing/heart_preprocessing/X_test_processed.csv
-          preprocessing/heart_preprocessing/y_train.csv
-          preprocessing/heart_preprocessing/y_test.csv
-          preprocessing/heart_preprocessing/feature_names.txt
+          preprocessing/data_preprocessing/X_train_processed.csv
+          preprocessing/data_preprocessing/X_test_processed.csv
+          preprocessing/data_preprocessing/y_train.csv
+          preprocessing/data_preprocessing/y_test.csv
+          preprocessing/data_preprocessing/feature_names.txt
           preprocessing/heart_preprocessing/preprocessor_pipeline.joblib
