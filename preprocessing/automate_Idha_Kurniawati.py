@@ -11,8 +11,8 @@ from sklearn.model_selection import train_test_split
 from joblib import dump
 
 # Lokasi file
-RAW_DATA_PATH = "Eksperimen_SML_Idha_Kurniawati/data_raw/heart.csv"
-OUTPUT_DIR = "Eksperimen_SML_Idha_Kurniawati/preprocessing/data_preprocessing"
+RAW_DATA_PATH = "data_raw/heart.csv"
+OUTPUT_DIR = "preprocessing/data_preprocessing"
 
 # Buat folder output jika belum ada
 os.makedirs(OUTPUT_DIR, exist_ok=True)
