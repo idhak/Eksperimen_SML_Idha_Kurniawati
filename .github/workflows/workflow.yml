@@ -1,0 +1,38 @@
+name: Preprocessing Automation
+
+on:
+  workflow_dispatch:  # agar bisa dijalankan manual dari tab "Actions"
+
+jobs:
+  run-preprocessing:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v3
+
+    - name: 🐍 Setup Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas scikit-learn joblib
+
+    - name: 🚀 Jalankan automate_Idha_Kurniawati.py
+      run: |
+        python preprocessing/automate_Idha_Kurniawati.py
+
+    - name: 📤 Upload output hasil preprocessing
+      uses: actions/upload-artifact@v3
+      with:
+        name: hasil-preprocessing
+        path: |
+          preprocessing/heart_preprocessing/X_train_processed.csv
+          preprocessing/heart_preprocessing/X_test_processed.csv
+          preprocessing/heart_preprocessing/y_train.csv
+          preprocessing/heart_preprocessing/y_test.csv
+          preprocessing/heart_preprocessing/feature_names.txt
+          preprocessing/heart_preprocessing/preprocessor_pipeline.joblib
