@@ -46,6 +46,7 @@ def get_preprocessing_pipeline():
 
 # Fungsi untuk menyimpan hasil preprocessing
 def save_processed_outputs(X_train, X_test, y_train, y_test, feature_names, preprocessor, output_dir):
+    os.makedirs(output_dir, exist_ok=True)
     pd.DataFrame(X_train, columns=feature_names).to_csv(os.path.join(output_dir, 'X_train_processed.csv'), index=False)
     pd.DataFrame(X_test, columns=feature_names).to_csv(os.path.join(output_dir, 'X_test_processed.csv'), index=False)
     y_train.to_csv(os.path.join(output_dir, 'y_train.csv'), index=False)
