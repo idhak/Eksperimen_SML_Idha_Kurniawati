@@ -38,5 +38,5 @@ jobs:
           preprocessing/heart_preprocessing/preprocessor_pipeline.joblib
 
     - name: 🔍 Cek isi folder output
-      run: ls -lah preprocessing/heart_preprocessing
+      run: ls -lah preprocessing/data_preprocessing
 
