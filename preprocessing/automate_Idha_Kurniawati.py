@@ -58,6 +58,14 @@ def save_processed_outputs(X_train, X_test, y_train, y_test, feature_names, fitt
 
     # Simpan pipeline yang sudah fit
     dump(fitted_pipeline, os.path.join(output_dir, 'preprocessor_pipeline.joblib'))
+
+    # Tambahkan log verifikasi
+    joblib_path = os.path.join(output_dir, 'preprocessor_pipeline.joblib')
+    if os.path.exists(joblib_path):
+        print(f"✅ File pipeline berhasil dibuat: {joblib_path}")
+    else:
+        print(f"❌ File pipeline TIDAK ditemukan setelah dump di path: {joblib_path}")
+
     print("✅ Semua file output berhasil disimpan.")
 
 # Fungsi utama untuk memuat, memproses, dan menyimpan data
