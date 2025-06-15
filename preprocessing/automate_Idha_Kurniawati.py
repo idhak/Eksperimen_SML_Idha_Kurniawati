@@ -45,8 +45,7 @@ def get_preprocessing_pipeline():
     return preprocessor, numeric_features, categorical_features
 
 # Fungsi untuk menyimpan hasil preprocessing
-def save_processed_outputs(X_train, X_test, y_train, y_test, feature_names, preprocessor, output_dir):
-    os.makedirs(output_dir, exist_ok=True)
+def save_processed_outputs(X_train, X_test, y_train, y_test, feature_names, fitted_pipeline, output_dir):
     pd.DataFrame(X_train, columns=feature_names).to_csv(os.path.join(output_dir, 'X_train_processed.csv'), index=False)
     pd.DataFrame(X_test, columns=feature_names).to_csv(os.path.join(output_dir, 'X_test_processed.csv'), index=False)
     y_train.to_csv(os.path.join(output_dir, 'y_train.csv'), index=False)
@@ -57,8 +56,8 @@ def save_processed_outputs(X_train, X_test, y_train, y_test, feature_names, prep
         for name in feature_names:
             f.write(name + "\n")
 
-    # Simpan pipeline
-    dump(preprocessor, os.path.join(output_dir, 'preprocessor_pipeline.joblib'))
+    # Simpan pipeline yang sudah fit
+    dump(fitted_pipeline, os.path.join(output_dir, 'preprocessor_pipeline.joblib'))
     print("✅ Semua file output berhasil disimpan.")
 
 # Fungsi utama untuk memuat, memproses, dan menyimpan data
@@ -75,6 +74,7 @@ def preprocess_and_save(input_path, output_dir):
     pipeline, numeric_features, categorical_features = get_preprocessing_pipeline()
     print("⚙️  Melakukan preprocessing...")
 
+    # Fit dan transform
     X_train_transformed = pipeline.fit_transform(X_train)
     X_test_transformed = pipeline.transform(X_test)
 
@@ -82,7 +82,7 @@ def preprocess_and_save(input_path, output_dir):
     cat_feature_names = pipeline.named_transformers_['cat']['encoder'].get_feature_names_out(categorical_features)
     final_feature_names = numeric_features + list(cat_feature_names)
 
-    # Simpan semua output
+    # Simpan semua output termasuk pipeline yang sudah fit
     save_processed_outputs(X_train_transformed, X_test_transformed, y_train, y_test, final_feature_names, pipeline, output_dir)
 
     # Tampilkan ringkasan
