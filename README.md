@@ -1,1 +1,0 @@
-# Eksperimen_SML_Idha_Kurniawati
